@@ -1,0 +1,33 @@
+.admin {
+  width: 100%;
+  display: flex;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.adminWrapper {
+  background-color: #fff;
+  width: 80%;
+  height: 100%;
+  padding: 4rem;
+}
+
+.adminWrapper_ {
+  width: 100%;
+  background-color: var(--sec);
+  height: 100%;
+  border-radius: 5rem;
+  padding: 5rem;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .adminWrapper {
+    width: 100%;
+    padding: 0;
+  }
+  .adminWrapper_ {
+    padding: 2rem;
+  }
+}

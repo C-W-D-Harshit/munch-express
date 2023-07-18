@@ -1,0 +1,59 @@
+.adminSidebar {
+  width: 20%;
+  height: 100%;
+  /* border: 1px solid black; */
+  padding: 5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.adminSidebar2 {
+  font-size: 2rem;
+  color: var(--sec-font);
+  height: 60%;
+}
+
+.adminSidebar2 > * {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+}
+
+.adminSidebar2 > * > :first-child {
+  margin-right: 1.2rem;
+}
+
+.adminSidebar3 {
+  display: flex;
+  font-size: 2.3rem;
+  align-items: center;
+  font-weight: 600;
+  background-color: var(--yellow);
+  color: #fff;
+  border-color: var(--yellow);
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: 0.5s ease-in-out;
+}
+
+.adminSidebar3:hover {
+  background-color: #fff;
+  color: var(--yellow);
+  cursor: pointer;
+}
+
+.addAct {
+  background-color: var(--l-yellow);
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .adminSidebar {
+    display: none;
+  }
+}

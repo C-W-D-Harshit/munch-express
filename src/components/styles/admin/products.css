@@ -1,0 +1,188 @@
+.adminProducts {
+  width: 100%;
+}
+
+.adminProducts_top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.adminProducts_top > :first-child {
+  width: max-content;
+  min-width: fit-content;
+  margin-right: 2rem;
+}
+
+.adminProducts_table {
+  width: 100%;
+  position: relative;
+}
+
+.adminProducts_table > * {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-size: 1.2rem;
+  transition: 0.5s ease-in-out;
+}
+
+.adminProducts_table > :first-child > * {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  user-select: none;
+}
+
+.adminProducts_table > * > * {
+  width: 16%;
+  /* max-width: 10rem; */
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.adminProducts_table > * > :last-child {
+  width: 10%;
+}
+
+.adminProducts_table > * > :nth-child(5) {
+  width: 10%;
+}
+
+.adminProducts_table > * > :nth-child(4) {
+  width: 10%;
+}
+
+.adminProducts_table > * > :nth-child(2) {
+  width: 20%;
+}
+
+.adminProducts_table > :first-child > * {
+  cursor: pointer;
+}
+
+.adminProducts_table > :first-child > * > :first-child {
+  margin-right: 1rem;
+}
+
+.adminProducts_table > :first-child {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.adminProducts_table > :nth-child(even) {
+  background-color: var(--l-yellow);
+}
+
+.adminProducts_table > *:hover {
+  /* background-color: var(--yellow); */
+  /* border: 1px solid black; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.adminProducts_table > :first-child:hover {
+  background-color: #fff;
+  /* border-color: #fff; */
+}
+
+.adminProduct_pag {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.adminProduct_pag > :first-child {
+  width: 15%;
+  min-width: 9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminProduct_pag > :first-child > * {
+  display: flex;
+  align-items: center;
+}
+
+.adminProduct_pag > :last-child > * {
+  display: flex;
+  align-items: center;
+}
+
+.adminProduct_pag > :last-child {
+  width: 15%;
+  min-width: 9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminProduct_pag > :nth-child(2) {
+  /* padding: 0 4rem; */
+  width: 58%;
+}
+
+.pagBut {
+  padding: 1rem;
+  background-color: var(--l-yellow);
+  color: black;
+  margin: 0 1rem;
+  border-color: var(--l-yellow);
+  transition: 0.5s ease-in-out;
+}
+
+.adminProduct_pag > :nth-child(2) > *:hover {
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+  cursor: pointer;
+}
+
+.pagActive {
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+}
+
+.adminProduct_pag > :first-child > :last-child {
+  font-size: 2rem;
+  padding: 1rem;
+  color: black;
+  /* margin-left: 1rem; */
+  transition: 0.5s ease-in-out;
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+}
+
+.adminProduct_pag > :last-child > :first-child {
+  font-size: 2rem;
+  padding: 1rem;
+  color: black;
+  /* margin-right: 1rem; */
+  transition: 0.5s ease-in-out;
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+}
+
+.adminProduct_n {
+  font-size: 1.8rem;
+}

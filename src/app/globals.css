@@ -1,76 +1,12 @@
 :root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
+  --yellow: #ffa216;
+  --l-yellow: #ffedd3;
+  --bg-color: #fffcf7;
+  --black: #000000;
+  --sec-font: #838383;
+  --sec: #f3f3f3;
+  --skin: #fed4a0;
+  --blue: #8be0ff;
 }
 
 * {
@@ -81,18 +17,11 @@
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  /* max-width: 100vw; */
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+  /* background-color: #fffcf7; */
+  /* overflow-x: hidden; */
 }
 
 a {
@@ -100,8 +29,306 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* layout */
+.margin {
+  padding: 0 10rem;
+}
+
+@media (max-width: 1300px) {
+  .margin {
+    padding: 0 8rem;
   }
+}
+
+@media (max-width: 1150px) {
+  .margin {
+    padding: 0 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .margin {
+    padding: 0 1.8rem;
+  }
+}
+
+/* Base font size for all devices */
+html {
+  font-size: 62.5%; /* Equivalent to 10px */
+}
+
+/* Media query for small phones */
+@media (max-width: 480px) {
+  html {
+    font-size: 55%; /* Equivalent to 8px for small phones */
+  }
+}
+
+/* Media query for medium-sized phones */
+@media (min-width: 481px) and (max-width: 767px) {
+  html {
+    font-size: 58%; /* Equivalent to 8.8px for medium-sized phones */
+  }
+}
+
+/* Media query for large phones */
+@media (min-width: 768px) and (max-width: 1024px) {
+  html {
+    font-size: 60%; /* Equivalent to 9.6px for large phones */
+  }
+}
+
+input:focus,
+input {
+  outline: none;
+  border: none;
+  background-color: inherit;
+}
+
+::-webkit-scrollbar-track {
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+  background-color: var(--bg-color);
+}
+
+::-webkit-scrollbar {
+  width: 0.8rem;
+  background-color: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--yellow);
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+}
+
+.divider {
+  height: 0.15rem;
+  width: 100%;
+  background-color: var(--sec-font);
+  border-radius: 1rem;
+}
+
+/* loader */
+.load_box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9000;
+}
+
+.loader {
+  --path: #2f3545;
+  --dot: #5628ee;
+  --duration: 3s;
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+  transform: scale(3);
+}
+/* .loader:before {
+  content: "";
+  width: 2px;
+  height: 6px;
+  border-radius: 50%;
+  position: absolute;
+  display: block;
+  background: var(--dot);
+  top: 0.5rem;
+  left: 0.2rem;
+  transform: translate(-18px, -18px);
+  -webkit-animation: dotRect var(--duration)
+    cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+  animation: dotRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+    infinite;
+} */
+.loader svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.loader svg rect,
+.loader svg polygon,
+.loader svg circle {
+  fill: none;
+  stroke: var(--path);
+  stroke-width: 10px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.loader svg polygon {
+  stroke-dasharray: 145 76 145 76;
+  stroke-dashoffset: 0;
+  -webkit-animation: pathTriangle var(--duration)
+    cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+  animation: pathTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+    infinite;
+}
+.loader svg rect {
+  stroke-dasharray: 192 64 192 64;
+  stroke-dashoffset: 0;
+  -webkit-animation: pathRect 3s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+  animation: pathRect 3s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+}
+.loader svg circle {
+  stroke-dasharray: 150 50 150 50;
+  stroke-dashoffset: 75;
+  -webkit-animation: pathCircle var(--duration)
+    cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+  animation: pathCircle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+    infinite;
+}
+.loader.triangle {
+  width: 48px;
+}
+.loader.triangle:before {
+  left: 21px;
+  transform: translate(-10px, -18px);
+  -webkit-animation: dotTriangle var(--duration)
+    cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+  animation: dotTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+    infinite;
+}
+
+@-webkit-keyframes pathTriangle {
+  33% {
+    stroke-dashoffset: 74;
+  }
+  66% {
+    stroke-dashoffset: 147;
+  }
+  100% {
+    stroke-dashoffset: 221;
+  }
+}
+
+@keyframes pathTriangle {
+  33% {
+    stroke-dashoffset: 74;
+  }
+  66% {
+    stroke-dashoffset: 147;
+  }
+  100% {
+    stroke-dashoffset: 221;
+  }
+}
+@-webkit-keyframes dotTriangle {
+  33% {
+    transform: translate(0, 0);
+  }
+  66% {
+    transform: translate(10px, -18px);
+  }
+  100% {
+    transform: translate(-10px, -18px);
+  }
+}
+@keyframes dotTriangle {
+  33% {
+    transform: translate(0, 0);
+  }
+  66% {
+    transform: translate(10px, -18px);
+  }
+  100% {
+    transform: translate(-10px, -18px);
+  }
+}
+@-webkit-keyframes pathRect {
+  25% {
+    stroke-dashoffset: 64;
+  }
+  50% {
+    stroke-dashoffset: 128;
+  }
+  75% {
+    stroke-dashoffset: 192;
+  }
+  100% {
+    stroke-dashoffset: 256;
+  }
+}
+@keyframes pathRect {
+  25% {
+    stroke-dashoffset: 64;
+  }
+  50% {
+    stroke-dashoffset: 128;
+  }
+  75% {
+    stroke-dashoffset: 192;
+  }
+  100% {
+    stroke-dashoffset: 256;
+  }
+}
+@-webkit-keyframes dotRect {
+  25% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(18px, -18px);
+  }
+  75% {
+    transform: translate(0, -36px);
+  }
+  100% {
+    transform: translate(-18px, -18px);
+  }
+}
+@keyframes dotRect {
+  25% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(18px, -18px);
+  }
+  75% {
+    transform: translate(0, -36px);
+  }
+  100% {
+    transform: translate(-18px, -18px);
+  }
+}
+@-webkit-keyframes pathCircle {
+  25% {
+    stroke-dashoffset: 125;
+  }
+  50% {
+    stroke-dashoffset: 175;
+  }
+  75% {
+    stroke-dashoffset: 225;
+  }
+  100% {
+    stroke-dashoffset: 275;
+  }
+}
+@keyframes pathCircle {
+  25% {
+    stroke-dashoffset: 125;
+  }
+  50% {
+    stroke-dashoffset: 175;
+  }
+  75% {
+    stroke-dashoffset: 225;
+  }
+  100% {
+    stroke-dashoffset: 275;
+  }
+}
+.loader {
+  display: inline-block;
+  margin: 0 5rem;
 }

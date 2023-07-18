@@ -1,0 +1,24 @@
+{"level":"info","message":"\u001b[0mGET /api/v1/product/64a65c8df37b1384214a00e4 \u001b[32m200\u001b[0m 56.773 ms - 714\u001b[0m"}
+{"level":"info","message":"\u001b[0mGET /api/v1/product/64a65c8df37b1384214a00e4 \u001b[32m200\u001b[0m 29.149 ms - 714\u001b[0m"}
+{"level":"info","message":"\u001b[0mGET /api/v1/product/64a65c8df37b1384214a00e \u001b[33m400\u001b[0m 4.426 ms - 62\u001b[0m"}
+2023-07-06 14:02:22 INFO: [0mGET /api/v1/product/64a65c8df37b1384214a00e [33m400[0m 18.205 ms - 62[0m
+2023-07-06 14:03:36 INFO: [0mGET /api/v1/product/64a65c8df37b1384214a00e [33m400[0m 4.376 ms - 62[0m
+2023-07-06 14:04:57 INFO: [0mGET /api/v1/product/64a65c8df37b1384214a00e [33m400[0m 20.514 ms - 62[0m
+2023-07-06 14:06:11 info: GET /api/v1/product/64a65c8df37b1384214a00e 400 34.557 ms - 62
+2023-07-06 14:08:03 info: GET /api/v1/product/64a65c8df37b1384214a00e 400 34.871 ms - 62
+2023-07-06 14:08:10 info: GET /api/v1/product/64a65c8df37b1384214a00e 400 3.353 ms - 62
+2023-07-06 14:08:47 info: GET /api/v1/producthg 404 5349.920 ms - -
+2023-07-06 14:11:02 info: GET /api/v1/products 200 141.821 ms - -
+2023-07-06 14:13:03 info: GET /api/v1/produc 404 4470.074 ms - -
+2023-07-06 14:13:35 info: GET /api/v1/products 200 37.366 ms - -
+2023-07-06 14:28:59 info: GET /dashboard 200 51456.628 ms - -
+2023-07-06 14:29:15 info: GET /dashboard/categories/undefined?_rsc=290ed95 404 3675.759 ms - -
+2023-07-06 14:29:32 info: GET /dashboard/popular?_rsc=290ed95 404 8151.397 ms - -
+2023-07-06 14:29:41 info: GET /dashboard?_rsc=290ed95 200 16910.944 ms - -
+2023-07-06 14:29:41 info: GET /dashboard/recipes?_rsc=290ed95 200 24909.328 ms - -
+2023-07-06 14:29:43 info: GET /dashboard/shop?_rsc=290ed95 200 26111.943 ms - -
+2023-07-06 14:29:43 info: GET /dashboard/categories?_rsc=290ed95 200 27052.139 ms - -
+2023-07-06 14:29:44 info: GET /dashboard/product/60cc1d571e2dd1a79a9899a2?_rsc=290ed95 200 12392.962 ms - -
+2023-07-06 14:30:31 info: GET /dashboard/categories/undefined 404 122.016 ms - -
+2023-07-06 14:30:33 info: GET /dashboard - - ms - -
+2023-07-06 14:30:33 info: GET /test 404 96.348 ms - -
