@@ -94,6 +94,20 @@ const productSchema = new mongoose.Schema(
       default: 0,
     },
     reviews: [reviewSchema],
+    sizes: [
+      {
+        name: {
+          type: String,
+          required: true,
+          enum: ["small", "medium", "large"],
+        },
+        price: {
+          type: Number,
+          required: [true, "Add-on price is required."],
+          min: [0, "Add-on price cannot be negative."],
+        },
+      },
+    ],
   },
   {
     timestamps: true,

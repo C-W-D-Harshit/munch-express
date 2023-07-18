@@ -7,118 +7,55 @@ import { IoReturnDownBackSharp } from "react-icons/io5";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Page = ({ params }) => {
-  const [product, setProduct] = useState(null);
-  const [nproduct, setNproduct] = useState(null);
+  const router = useRouter();
+  const [product, setProduct] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    featured: false,
+    tags: "",
+    addons: [],
+    sizes: [],
+  });
   const [addOn, setAddOn] = useState(false);
-  const [addons, setAddons] = useState(null);
+  const [size, setSize] = useState(false);
+  const [addons, setAddons] = useState([]);
+  const [sizes, setSizes] = useState([]);
   const [addOnCount, setAddOnCount] = useState(0);
+  const [sizeCount, setSizeCount] = useState(0);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [newProduct, setNewProduct] = useState([]);
 
-  const handleAddMore = () => {
-    setAddOnCount((prevCount) => prevCount + 1);
-  };
-  const getData = async () => {
-    try {
-      let apiUrl = `/api/v1/product/${params.id}`;
-
-      const { data } = await axios.get(apiUrl);
-      setProduct(data.product);
-      if (data.product.addons.length > 0) {
-        setAddOn(true);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const { data } = await axios.get(`/api/v1/product/${params.id}`);
+        setProduct(data.product);
+        setSizes(data.product.sizes);
         setAddons(data.product.addons);
         setAddOnCount(data.product.addons.length);
+        setSizeCount(data.product.sizes.length);
+        setSize(data.product.sizes.length > 0);
+        setAddOn(data.product.addons.length > 0);
+      } catch (err) {
+        setLoading(false);
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-  useEffect(() => {
-    setProduct({
-      price: 0,
-    });
-    setAddons({
-      price: 0,
-    });
+      setLoading(false);
+    };
     getData();
   }, []);
-
-  if (!product) {
-    return <Loader />;
-  }
 
   if (loading === true) {
     return <Loader />;
   }
 
-  const handleInputChangeA = (e, index) => {
-    const { name, value, type, checked } = e.target;
-    const updatedAddons = [...addons];
-    if (name === "price") {
-      const price = parseFloat(value);
-      updatedAddons[index] = {
-        ...updatedAddons[index],
-        [name]: price,
-      };
-    } else {
-      updatedAddons[index] = {
-        ...updatedAddons[index],
-        [name]: value,
-      };
-    }
-    let addon = [...updatedAddons];
-    addon = addon.splice(0, product.addons?.length + 1);
-    setAddons(updatedAddons);
-    setNproduct((prevProduct) => ({
-      ...prevProduct,
-      addons: addon,
-    }));
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    let newValue = type === "checkbox" ? checked : value;
-
-    if (name === "tags") {
-      newValue = newValue.split(",");
-    }
-
-    if (name === "addons") {
-      setAddOn(checked);
-      if (!checked && product.addons.length !== 0) {
-        setNproduct((prevProduct) => {
-          const { addons, ...updatedNProduct } = prevProduct;
-          return updatedNProduct;
-        });
-      }
-      return;
-    }
-    if (name === "price") {
-      newValue = parseFloat(newValue);
-    }
-
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: newValue,
-    }));
-    setNproduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: newValue,
-    }));
-  };
-  const handleRemoveAddon = (index) => {
-    const updatedAddons = [...addons];
-    updatedAddons.splice(index, 1);
-    setAddons(updatedAddons);
-    setAddOnCount(addOnCount - 1);
-    setNproduct((prevProduct) => ({
-      ...prevProduct,
-      addons: updatedAddons,
-    }));
-  };
-  // console.log(nproduct);
   const handleImageChange = (event) => {
     // const selectedImage = event.target.files[0];
     // setImage(selectedImage);
@@ -138,7 +75,11 @@ const Page = ({ params }) => {
 
         if (imagesArray.length === files.length) {
           setImage(imagesArray);
-          setNproduct((prevProduct) => ({
+          setProduct((prevProduct) => ({
+            ...prevProduct,
+            image: imagesArray,
+          }));
+          setNewProduct((prevProduct) => ({
             ...prevProduct,
             image: imagesArray,
           }));
@@ -150,25 +91,177 @@ const Page = ({ params }) => {
     }
   };
 
+  const handleAddMore = () => {
+    setAddOnCount((prevCount) => prevCount + 1);
+  };
+  const handleAddMoreSize = () => {
+    setSizeCount((prevCount) => prevCount + 1);
+  };
+
+  const handleInputChangeA = (e, index) => {
+    const { name, value, type, checked } = e.target;
+    const updatedAddons = [...addons];
+    if (name === "price") {
+      const price = parseFloat(value);
+      updatedAddons[index] = {
+        ...updatedAddons[index],
+        [name]: price,
+      };
+    } else {
+      updatedAddons[index] = {
+        ...updatedAddons[index],
+        [name]: value,
+      };
+    }
+    let addon = [...updatedAddons];
+    addon = addon.splice(0, addons.length + 1);
+    setAddons(updatedAddons);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      addons: addon,
+    }));
+    setNewProduct((prevProduct) => ({
+      ...prevProduct,
+      addons: addon,
+    }));
+  };
+  const handleInputChangeS = (e, index) => {
+    const { name, value, type, checked } = e.target;
+    const updatedSizes = [...sizes];
+    if (name === "price") {
+      const price = parseFloat(value);
+      updatedSizes[index] = {
+        ...updatedSizes[index],
+        [name]: price,
+      };
+    } else {
+      updatedSizes[index] = {
+        ...updatedSizes[index],
+        [name]: value.toLowerCase(),
+      };
+    }
+    let size = [...updatedSizes];
+    size = size.splice(0, sizes.length + 1);
+    setSizes(updatedSizes);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      sizes: size,
+    }));
+    setNewProduct((prevProduct) => ({
+      ...prevProduct,
+      sizes: size,
+    }));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    let newValue = type === "checkbox" ? checked : value;
+
+    if (name === "tags") {
+      newValue = newValue.split(",");
+    }
+
+    if (name === "addons") {
+      setAddOn(checked);
+      setAddOnCount(checked ? 1 : 0);
+      if (!checked) {
+        setProduct((prevProduct) => ({
+          ...prevProduct,
+          addons: [],
+        }));
+        setNewProduct((prevProduct) => ({
+          ...prevProduct,
+          addons: [],
+        }));
+        return;
+      }
+    }
+
+    if (name === "sizes") {
+      setSize(checked);
+      setSizeCount(checked ? 1 : 0);
+      if (!checked) {
+        setProduct((prevProduct) => ({
+          ...prevProduct,
+          sizes: [],
+        }));
+        setNewProduct((prevProduct) => ({
+          ...prevProduct,
+          sizes: [],
+        }));
+        return;
+      }
+    }
+
+    if (name === "price") {
+      newValue = parseFloat(newValue);
+    }
+
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: newValue,
+    }));
+    setNewProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: newValue,
+    }));
+  };
+
+  const handleRemoveAddon = (index) => {
+    const updatedAddons = [...addons];
+    updatedAddons.splice(index, 1);
+    setAddons(updatedAddons);
+    setAddOnCount((prevCount) => prevCount - 1);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      addons: updatedAddons,
+    }));
+    setNewProduct((prevProduct) => ({
+      ...prevProduct,
+      addons: updatedAddons,
+    }));
+  };
+  const handleRemoveSize = (index) => {
+    const updatedSizes = [...sizes];
+    updatedSizes.splice(index, 1);
+    setSizes(updatedSizes);
+    setSizeCount((prevCount) => prevCount - 1);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      sizes: updatedSizes,
+    }));
+    setNewProduct((prevProduct) => ({
+      ...prevProduct,
+      sizes: updatedSizes,
+    }));
+  };
+
+  const config = {
+    headers: { "Content-Type": "application/json" },
+  };
+
   const save = async () => {
+    // console.log(product);
+    // setImage(product.image);
+
     try {
       setLoading(true);
-      const { data } = await axios.patch(
-        `/api/v1/product/${params.id}`,
-        nproduct
-      );
 
-      Swal.fire("Updated Successfully!", "", "success");
-      setProduct(data.product);
-      if (data.product.addons.length > 0) {
-        setAddOn(true);
-        setAddons(data.product.addons);
-        setAddOnCount(data.product.addons.length);
+      if (newProduct) {
+        const { data } = await axios.patch(
+          `/api/v1/product/${product._id}`,
+          newProduct,
+          config
+        );
+
+        Swal.fire("Successfull!", data.message, "success");
+        router.push("/admin/products");
       }
     } catch (err) {
       Swal.fire("Validation Error", err.response.data.message, "error");
       setLoading(false);
     }
+
     setLoading(false);
   };
 
@@ -177,6 +270,7 @@ const Page = ({ params }) => {
       const { data } = await axios.delete(`/api/v1/product/${params.id}`);
 
       Swal.fire("Deleted Successfully!", data.message, "success");
+      router.push("/admin/products");
     } catch (err) {
       Swal.fire("Validation Error", err.message, "error");
     }
@@ -186,7 +280,7 @@ const Page = ({ params }) => {
     <div className="adminProductDetails">
       <div className="adminProductDetails_top">
         <p>
-          Product ID: <span>{params.id}</span>
+          Product ID: <span>{product._id}</span>
         </p>
       </div>
       <Link href="/admin/products">
@@ -212,9 +306,13 @@ const Page = ({ params }) => {
                 id="description"
                 rows="4"
                 name="description"
-                value={product.description}
+                value={
+                  product.description.charAt(0).toUpperCase() +
+                  product.description.slice(1)
+                }
                 placeholder="Product Description"
                 onChange={handleInputChange}
+                style={{ textTransform: "none" }}
               />
             </div>
             <div className="adminPD_name">
@@ -226,6 +324,7 @@ const Page = ({ params }) => {
                 placeholder={"Product Price"}
                 value={product.price}
                 onChange={handleInputChange}
+                min={0}
               />
             </div>
             <div className="adminPD_name">
@@ -235,7 +334,7 @@ const Page = ({ params }) => {
                 name="category"
                 id="category"
                 placeholder={"Product Category"}
-                value={product.category}
+                value={product.category.replace(/\s+/g, "-")}
                 onChange={handleInputChange}
               />
             </div>
@@ -270,11 +369,21 @@ const Page = ({ params }) => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="adminPD_name">
+              <p>Sizes</p>
+              <input
+                type="checkbox"
+                name="sizes"
+                id="sizes"
+                checked={size}
+                onChange={handleInputChange}
+              />
+            </div>
             <div className="divider" style={{ marginBottom: "2rem" }}></div>
           </div>
           {addOn === true &&
             [...Array(addOnCount)].map((_, index) => {
-              const addon = addons[index];
+              const addon = addons && addons[index];
 
               return (
                 <>
@@ -298,6 +407,36 @@ const Page = ({ params }) => {
                   </div>
                   {index === addOnCount - 1 && (
                     <button onClick={handleAddMore}>Add More</button>
+                  )}
+                </>
+              );
+            })}
+          {size === true &&
+            [...Array(sizeCount)].map((_, index) => {
+              const size = sizes && sizes[index];
+
+              return (
+                <>
+                  <div className="adminPD_addon" key={index}>
+                    <button onClick={() => handleRemoveSize(index)}>
+                      Remove
+                    </button>
+                    <input
+                      type="text"
+                      name="name"
+                      onChange={(e) => handleInputChangeS(e, index)}
+                      value={size ? size.name : ""}
+                    />
+                    <input
+                      type="number"
+                      name="price"
+                      onChange={(e) => handleInputChangeS(e, index)}
+                      value={size ? size.price : ""}
+                      min={0}
+                    />
+                  </div>
+                  {index === sizeCount - 1 && (
+                    <button onClick={handleAddMoreSize}>Add More</button>
                   )}
                 </>
               );

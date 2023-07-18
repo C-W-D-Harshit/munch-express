@@ -504,13 +504,13 @@
   padding: 2rem 3rem;
 }
 
-.addon___ > :first-child {
+.addon___ > p {
   font-size: 3rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
-.addon___ > :last-child {
+.addon___ > button {
   font-size: 2rem;
   font-weight: 600;
   padding: 1rem 1.5rem;
@@ -518,11 +518,12 @@
   border-color: var(--yellow);
   background-color: var(--yellow);
   color: #fff;
+  margin-top: 2rem;
 }
 
 .addon_tb {
   width: 100%;
-  height: 70%;
+  height: 30%;
   max-height: 70%;
   overflow: hidden;
   overflow-y: auto;

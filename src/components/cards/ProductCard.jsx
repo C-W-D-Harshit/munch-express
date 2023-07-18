@@ -18,7 +18,9 @@ const ProductCard = ({ product }) => {
   const [open, setOpen] = useState(false);
   // const [nProduct, setNproduct] = useState(null);
   const [addons, setAddons] = useState(product.addons);
+  const [sizes, setSizes] = useState(product.sizes);
   const [selectedAddons, setSelectedAddons] = useState([]);
+  const [selectedSize, setSelectedSize] = useState(null);
 
   const handleAddonSelection = (addonName) => {
     const isAddonSelected = selectedAddons.includes(addonName);
@@ -44,6 +46,10 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const handleSizeSelection = (sizeName) => {
+    setSelectedSize(sizeName);
+  };
+
   const atp = () => {
     // Calculate the total price of selected addons
     const addonsPrice = selectedAddons.reduce((total, addon) => {
@@ -51,13 +57,17 @@ const ProductCard = ({ product }) => {
       return total + addonItem.price;
     }, 0);
 
+    const sizeItem = sizes.find((size) => size.name === selectedSize);
+    const sizePrice = sizeItem ? sizeItem.price : 0;
+
     // Calculate the final price of the product with addons
-    const finalPrice = product.price + addonsPrice;
+    const finalPrice = product.price + addonsPrice + sizePrice;
 
     // Create the updated product object with selected addons, quantity, and final price
     const updatedProduct = {
       ...product,
       selectedAddons: [...selectedAddons],
+      selectedSize,
       quantity: 1,
       finalPrice: finalPrice,
     };
@@ -69,7 +79,8 @@ const ProductCard = ({ product }) => {
     // Dispatch addToCart action with nProduct
     dispatch(addToCart(nProduct));
 
-    // Reset selected addons
+    // Reset
+    setSelectedSize(null);
     setSelectedAddons([]);
 
     //close
@@ -118,6 +129,32 @@ const ProductCard = ({ product }) => {
                       name={addon.name}
                       checked={selectedAddons.includes(addon.name)}
                       onChange={() => handleAddonSelection(addon.name)}
+                    />
+                  </div>
+                ))}
+              </div>
+              <p>Select Size</p>
+              <div className="addon_tb">
+                <div>
+                  <p>S.No</p>
+                  <p>Size</p>
+                  <p>Price</p>
+                  <p>Select</p>
+                </div>
+                {sizes?.map((size, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleSizeSelection(size.name)}
+                  >
+                    <p>{index + 1}</p>
+                    <p>{size.name}</p>
+                    <p>{size.price}</p>
+                    <input
+                      type="radio"
+                      name="size"
+                      value={size.name}
+                      checked={selectedSize === size.name}
+                      onChange={() => handleSizeSelection(size.name)}
                     />
                   </div>
                 ))}

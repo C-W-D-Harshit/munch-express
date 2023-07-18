@@ -17,10 +17,14 @@ const Page = () => {
     featured: false,
     tags: "",
     addons: [],
+    sizes: [],
   });
   const [addOn, setAddOn] = useState(false);
+  const [size, setSize] = useState(false);
   const [addons, setAddons] = useState([]);
+  const [sizes, setSizes] = useState([]);
   const [addOnCount, setAddOnCount] = useState(0);
+  const [sizeCount, setSizeCount] = useState(0);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -62,6 +66,9 @@ const Page = () => {
   const handleAddMore = () => {
     setAddOnCount((prevCount) => prevCount + 1);
   };
+  const handleAddMoreSize = () => {
+    setSizeCount((prevCount) => prevCount + 1);
+  };
 
   const handleInputChangeA = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -86,6 +93,29 @@ const Page = () => {
       addons: addon,
     }));
   };
+  const handleInputChangeS = (e, index) => {
+    const { name, value, type, checked } = e.target;
+    const updatedSizes = [...sizes];
+    if (name === "price") {
+      const price = parseFloat(value);
+      updatedSizes[index] = {
+        ...updatedSizes[index],
+        [name]: price,
+      };
+    } else {
+      updatedSizes[index] = {
+        ...updatedSizes[index],
+        [name]: value.toLowerCase(),
+      };
+    }
+    let size = [...updatedSizes];
+    size = size.splice(0, sizes.length + 1);
+    setSizes(updatedSizes);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      sizes: size,
+    }));
+  };
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -101,6 +131,18 @@ const Page = () => {
       if (!checked) {
         setProduct((prevProduct) => {
           const { addons, ...updatedProduct } = prevProduct;
+          return updatedProduct;
+        });
+      }
+      return;
+    }
+
+    if (name === "sizes") {
+      setSize(checked);
+      setSizeCount(1);
+      if (!checked) {
+        setProduct((prevProduct) => {
+          const { sizes, ...updatedProduct } = prevProduct;
           return updatedProduct;
         });
       }
@@ -125,6 +167,16 @@ const Page = () => {
     setProduct((prevProduct) => ({
       ...prevProduct,
       addons: updatedAddons,
+    }));
+  };
+  const handleRemoveSize = (index) => {
+    const updatedSizes = [...sizes];
+    updatedSizes.splice(index, 1);
+    setSizes(updatedSizes);
+    setSizeCount((prevCount) => prevCount - 1);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      sizes: updatedSizes,
     }));
   };
 
@@ -155,6 +207,7 @@ const Page = () => {
         featured: false,
         tags: "",
         addons: [],
+        sizes: [],
       });
       Swal.fire("Successfull!", data.message, "success");
     } catch (err) {
@@ -268,6 +321,16 @@ const Page = () => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="adminPD_name">
+              <p>Sizes</p>
+              <input
+                type="checkbox"
+                name="sizes"
+                id="sizes"
+                checked={size}
+                onChange={handleInputChange}
+              />
+            </div>
             <div className="divider" style={{ marginBottom: "2rem" }}></div>
           </div>
           {addOn === true &&
@@ -296,6 +359,36 @@ const Page = () => {
                   </div>
                   {index === addOnCount - 1 && (
                     <button onClick={handleAddMore}>Add More</button>
+                  )}
+                </>
+              );
+            })}
+          {size === true &&
+            [...Array(sizeCount)].map((_, index) => {
+              const size = sizes && sizes[index];
+
+              return (
+                <>
+                  <div className="adminPD_addon" key={index}>
+                    <button onClick={() => handleRemoveSize(index)}>
+                      Remove
+                    </button>
+                    <input
+                      type="text"
+                      name="name"
+                      onChange={(e) => handleInputChangeS(e, index)}
+                      value={size ? size.name : ""}
+                    />
+                    <input
+                      type="number"
+                      name="price"
+                      onChange={(e) => handleInputChangeS(e, index)}
+                      value={size ? size.price : ""}
+                      min={0}
+                    />
+                  </div>
+                  {index === sizeCount - 1 && (
+                    <button onClick={handleAddMoreSize}>Add More</button>
                   )}
                 </>
               );

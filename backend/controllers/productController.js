@@ -29,7 +29,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   let images = [];
 
   images = req.body.image;
-  console.log(images);
+  // console.log(images);
   const imagesLinks = [];
   for (let i = 0; i < images.length; i++) {
     const result = await cloudinary.v2.uploader.upload(images[i], {
