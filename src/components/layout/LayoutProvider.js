@@ -36,6 +36,10 @@ const LayoutProvider = ({ children }) => {
     if (cartItems !== null) {
       dispatch(setCartItems(cartItems));
       setLoading(false);
+    } else {
+      const items = [];
+      localStorage.setItem("cartItems", JSON.stringify(items));
+      setLoading(false);
     }
   }, []);
 
