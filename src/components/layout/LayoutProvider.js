@@ -9,10 +9,13 @@ import Link from "next/link";
 import { BiBell } from "react-icons/bi";
 import { IoBagHandleOutline, IoPersonCircleOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SidebarAdmin from "./admin/Sidebar";
 import "@/components/styles/admin/admin.css";
 import MobSidebar from "@/components/layout/dashboard/mobSidebar";
+import { useEffect, useState } from "react";
+import { setCartItems } from "@/redux/features/cartSlice";
+import Loader from "../loader";
 
 const LayoutProvider = ({ children }) => {
   const path = usePathname();
@@ -21,7 +24,25 @@ const LayoutProvider = ({ children }) => {
   const inAdmin = /^\/admin\b/.test(path);
   const notificationCounter = 1;
   const cart = useSelector((state) => state.cart.items);
+  const cartCounter = useSelector((state) => state.cart.totalQuantity);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Get the cart items from localStorage
+    const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+
+    // Dispatch the setCartItems action only if there are cart items in localStorage
+    if (cartItems !== null) {
+      dispatch(setCartItems(cartItems));
+      setLoading(false);
+    }
+  }, []);
+
   if (inDashboard) {
+    if (loading === true) {
+      return <Loader widt={"100vw"} heigh={"100vh"} />;
+    }
     return (
       <div className="dashboardLayout">
         <NextTopLoader showSpinner={false} color="#fb9501" />
@@ -48,7 +69,7 @@ const LayoutProvider = ({ children }) => {
               </Link>
               <Link href={"/dashboard/cart"} className="dashIco">
                 <IoBagHandleOutline />
-                <span>{cart.length}</span>
+                <span>{cartCounter}</span>
               </Link>
               <Link href={"/dashboard/profile"} className="dashIco">
                 <IoPersonCircleOutline />

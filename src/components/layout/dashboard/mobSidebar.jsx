@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 const MobSidebar = () => {
   const path = usePathname();
-  const cart = useSelector((state) => state.cart.items);
+  const cart = useSelector((state) => state.cart.totalQuantity);
   const icons = [
     { icon: <BsShopWindow />, link: "/dashboard/m-shop" },
     { icon: <BsSearch />, link: "/dashboard/search" },
@@ -30,7 +30,7 @@ const MobSidebar = () => {
           className={path === icon.link ? "avt" : ""}
         >
           {icon.icon}
-          {icon.link === "/dashboard/cart" ? <span>{cart.length}</span> : null}
+          {icon.link === "/dashboard/cart" ? <span>{cart}</span> : null}
         </Link>
       ))}
     </div>

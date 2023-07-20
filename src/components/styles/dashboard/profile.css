@@ -41,3 +41,26 @@
   border-radius: 0.5rem;
   margin-left: 1rem;
 }
+
+.profilepg {
+  width: 100%;
+}
+
+.profilepg > * {
+  margin-bottom: 0.8rem;
+}
+
+.profilepg button {
+  padding: 1rem 1.5rem;
+  color: #fff;
+  background-color: var(--yellow);
+  border-radius: 0.5rem;
+  border-color: var(--yellow);
+  margin: 1rem;
+  font-weight: 600;
+}
+
+.profilepg > :first-child {
+  font-size: 2rem;
+  font-weight: 600;
+}

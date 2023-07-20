@@ -548,6 +548,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-transform: capitalize;
 }
 
 .addon_tb > * > :nth-child(2) {
@@ -555,6 +556,31 @@
 }
 .addon_tb > :nth-child(even) {
   background-color: var(--l-yellow);
+}
+
+.mob_addon {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+}
+
+.mob_addon_ {
+  height: 55%;
+  background-color: #42424250;
+  width: 100%;
+}
+
+.mob_addon__ {
+  height: 45%;
+  width: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .dashMvi {
@@ -602,6 +628,12 @@
 }
 
 @media (max-width: 768px) {
+  .addon {
+    display: none;
+  }
+  .mob_addon {
+    display: flex;
+  }
   .mobSidebar {
     display: flex !important;
   }
