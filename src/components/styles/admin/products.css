@@ -51,6 +51,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-transform: capitalize;
 }
 
 .adminProducts_table > * > :last-child {
@@ -67,6 +68,7 @@
 
 .adminProducts_table > * > :nth-child(2) {
   width: 20%;
+  font-weight: 500;
 }
 
 .adminProducts_table > :first-child > * {
