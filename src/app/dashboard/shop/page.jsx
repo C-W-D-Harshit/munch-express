@@ -7,6 +7,7 @@ import Loader from "@/components/loader";
 import axios from "axios";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import "@/components/styles/admin/products.css";
+import { Flex, RadioGroup, Text } from "@radix-ui/themes";
 
 const Shop = () => {
   const [products, setProducts] = useState(null);
@@ -107,59 +108,111 @@ const Shop = () => {
               <div>
                 <p>Price</p>
                 <div>
-                  <div>
-                    <label>
-                      <input
-                        type="radio"
-                        name="priceSort"
-                        value="+price"
-                        checked={sort === "+price"}
-                        onChange={handlePriceSortChange}
-                      />
-                      Low to High
-                    </label>
-                  </div>
-                  <div>
-                    <label>
-                      <input
-                        type="radio"
-                        name="priceSort"
-                        value="-price"
-                        checked={sort === "-price"}
-                        onChange={handlePriceSortChange}
-                      />
-                      High to Low
-                    </label>
-                  </div>
+                  <RadioGroup.Root defaultValue="1">
+                    <div>
+                      {/* <label>
+                        <input
+                          type="radio"
+                          name="priceSort"
+                          value="+price"
+                          checked={sort === "+price"}
+                          onChange={handlePriceSortChange}
+                        />
+                        Low to High
+                      </label> */}
+                      <label>
+                        <Flex gap="2" align="center">
+                          <RadioGroup.Item
+                            // name="priceSort"
+                            value="+price"
+                            checked={sort === "+price"}
+                            // onChange={handlePriceSortChange}
+                            onClick={() => setSort("+price")}
+                          />
+                          <Text size="2">Low To High</Text>
+                        </Flex>
+                      </label>
+                    </div>
+                    <div>
+                      {/* <label>
+                        <input
+                          type="radio"
+                          name="priceSort"
+                          value="-price"
+                          checked={sort === "-price"}
+                          onChange={handlePriceSortChange}
+                        />
+                        High to Low
+                      </label> */}
+                      <label>
+                        <Flex gap="2" align="center">
+                          <RadioGroup.Item
+                            // name="priceSort"
+                            value="-price"
+                            checked={sort === "-price"}
+                            // onChange={handlePriceSortChange}
+                            onClick={() => setSort("-price")}
+                          />
+                          <Text size="2">High To Low</Text>
+                        </Flex>
+                      </label>
+                    </div>
+                  </RadioGroup.Root>
                 </div>
               </div>
               <div>
                 <p>Ratings</p>
                 <div>
-                  <div>
-                    <label>
-                      <input
-                        type="radio"
-                        name="ratingsSort"
-                        value="+averageratings"
-                        checked={sort === "+averageratings"}
-                        onChange={handleRatingsSortChange}
-                      />
-                      Low to High
-                    </label>
-                  </div>
-                  <div>
-                    <label>
-                      <input
-                        type="radio"
-                        name="ratingsSort"
-                        value="-averageratings"
-                        checked={sort === "-averageratings"}
-                        onChange={handleRatingsSortChange}
-                      />
-                      High to Low
-                    </label>
-                  </div>
+                  <RadioGroup.Root defaultValue="1">
+                    <div>
+                      {/* <label>
+                        <input
+                          type="radio"
+                          name="ratingsSort"
+                          value="+averageratings"
+                          checked={sort === "+averageratings"}
+                          onChange={handleRatingsSortChange}
+                        />
+                        Low to High
+                      </label> */}
+                      <label>
+                        <Flex gap="2" align="center">
+                          <RadioGroup.Item
+                            // name="priceSort"
+                            value="+averageratings"
+                            checked={sort === "+averageratings"}
+                            // onChange={handlePriceSortChange}
+                            onClick={() => setSort("+averageratings")}
+                          />
+                          <Text size="2">Low To High</Text>
+                        </Flex>
+                      </label>
+                    </div>
+                    <div>
+                      {/* <label>
+                        <input
+                          type="radio"
+                          name="ratingsSort"
+                          value="-averageratings"
+                          checked={sort === "-averageratings"}
+                          onChange={handleRatingsSortChange}
+                        />
+                        High to Low
+                      </label> */}
+                      <label>
+                        <Flex gap="2" align="center">
+                          <RadioGroup.Item
+                            // name="priceSort"
+                            value="+averageratings"
+                            checked={sort === "-averageratings"}
+                            // onChange={handlePriceSortChange}
+                            onClick={() => setSort("-averageratings")}
+                          />
+                          <Text size="2">High to Low</Text>
+                        </Flex>
+                      </label>
+                    </div>
+                  </RadioGroup.Root>
                 </div>
               </div>
             </div>
@@ -168,72 +221,6 @@ const Shop = () => {
           <button className="filt_but" onClick={remFilt}>
             <p>Remove Filters</p>
           </button>
-
-          {/* <div className="divider" style={{ marginBottom: "2rem" }} />
-
-          <div className="shop_filter__">
-            <p>Filters</p>
-            <div>
-              <p>Ratings</p>
-              <div>
-                <div>
-                  <input
-                    type="radio"
-                    name="ratings"
-                    id="rating5"
-                    value={5}
-                    checked={selectedRating === 5}
-                    onChange={handleRatingChange}
-                  />
-                  <label htmlFor="rating5">⭐⭐⭐⭐⭐</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    name="ratings"
-                    id="rating4"
-                    value={4}
-                    checked={selectedRating === 4}
-                    onChange={handleRatingChange}
-                  />
-                  <label htmlFor="rating4">⭐⭐⭐⭐</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    name="ratings"
-                    id="rating3"
-                    value={3}
-                    checked={selectedRating === 3}
-                    onChange={handleRatingChange}
-                  />
-                  <label htmlFor="rating3">⭐⭐⭐</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    name="ratings"
-                    id="rating2"
-                    value={2}
-                    checked={selectedRating === 2}
-                    onChange={handleRatingChange}
-                  />
-                  <label htmlFor="rating2">⭐⭐</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    name="ratings"
-                    id="rating1"
-                    value={1}
-                    checked={selectedRating === 1}
-                    onChange={handleRatingChange}
-                  />
-                  <label htmlFor="rating1">⭐</label>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
         <div className="shop_holder">
           <div className="shop_holder_">
